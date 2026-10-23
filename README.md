@@ -20,13 +20,9 @@ Students can explore cockpit controls, follow audio-guided procedures, and reinf
 
 This prototype is not FAA-approved and must not be used for actual aircraft operations, flight planning, or as a substitute for professional flight instruction.
 
-It is not a replacement for the aircraft's approved Pilot's Operating Handbook (POH), Airplane Flight Manual (AFM), or applicable checklists.
-
-Procedures, cockpit representations, and interactions may be incomplete, simplified, or inaccurate.
-
-Always consult the appropriate aircraft documentation and a qualified flight instructor.
+It is not a replacement for the aircraft's approved Pilot's Operating Handbook (POH), Airplane Flight Manual (AFM), or applicable checklists. Procedures, cockpit representations, and interactions may be incomplete, simplified, or inaccurate. Always consult the appropriate aircraft documentation and a qualified flight instructor.
 
 ## Development Status
 
-This is an early beta prototype. Features, procedures, narration, and cockpit interactions are still being developed and tested. The goal is to create an immersive training experience that improves FLOW allows student pilots to learn by doing, first through a web browser and eventually in virtual reality.
+This is an early beta prototype. Features, procedures, narration, and cockpit interactions are still being developed and tested.
 
