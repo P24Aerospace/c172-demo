@@ -1,0 +1,204 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>N796SP | C172 Cockpit Training Beta</title><style>
+:root{--bg:#07111d;--cyan:#49bbfb;--line:#36516b;--txt:#e9f1fa;--muted:#9eb3c7;--green:#72d7a7}*{box-sizing:border-box}body{margin:0;background:#07111d;color:var(--txt);font:14px system-ui,Arial,sans-serif;overflow:hidden}button{font:inherit;color:inherit;cursor:pointer}#scene{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#8bc7e9 0%,#d6ebef 55%,#667a86 56%,#404f59 100%)}#viewport{position:absolute;top:50%;left:50%;width:1800px;height:1060px;transform:translate(-50%,-50%) scale(var(--scale,1)) translate(var(--panX,0px),var(--panY,0px));transform-origin:center;will-change:transform}#cockpit{height:100%;width:100%;user-select:none;touch-action:none;cursor:grab}#cockpit.dragging{cursor:grabbing}#cockpit text{pointer-events:none}#glass{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 35%,transparent 37%,#03101e55 100%)}#topbar{position:absolute;left:18px;right:18px;top:15px;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none}#topbar>*{pointer-events:auto}.pill{background:#061323d9;border:1px solid #61839b88;border-radius:14px;padding:10px 14px;box-shadow:0 6px 24px #0005}#brand{font-weight:800;letter-spacing:.02em}small{color:#a0b8ca}#actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}#actions button,.subbutton{background:#163049;border:1px solid #4b6c87;border-radius:9px;padding:9px 12px}#actions button:hover,.subbutton:hover{background:#235274}#actions .active{background:#075889;border-color:#61c8ff}#help{position:absolute;top:78px;right:18px;width:265px;background:#08182bdc;padding:13px 15px;border:1px solid #526d82;border-radius:13px;line-height:1.5}#help strong{color:#c7eaff}#help .hint{color:#9fc2da;font-size:12px}#toast{position:absolute;left:50%;top:15%;transform:translateX(-50%);border:1px solid #68c0ed;background:#061c31e8;padding:12px 18px;border-radius:12px;opacity:0;transition:opacity .25s;pointer-events:none;max-width:min(90vw,550px);text-align:center;font-weight:700;z-index:10}#toast.show{opacity:1}#kneeboard{position:absolute;left:max(14px,calc(50vw - 585px));bottom:16px;width:min(360px,44vw);height:min(445px,62vh);transform:rotate(-5deg);transform-origin:bottom left;filter:drop-shadow(10px 16px 14px #0009);transition:transform .25s,height .25s;z-index:5}#kneeboard.moving{transition:none;transform:rotate(0deg)}#kneeboard.hidden{display:none}#ipad-head{cursor:grab;touch-action:none;user-select:none}#ipad-head.dragging{cursor:grabbing}#kneeboard.fold{height:120px;transform:rotate(-5deg) translateY(0)}#kneeboard .strap{position:absolute;bottom:-9px;left:22%;width:56%;height:27px;border-radius:0 0 20px 20px;background:linear-gradient(#586375,#202833);z-index:-1}#ipad{height:100%;border:11px solid #151b22;border-radius:24px;background:#071624;box-shadow:inset 0 0 0 1px #667483,0 8px 30px #0008;display:flex;flex-direction:column;overflow:hidden}#ipad-head{background:#122e48;padding:13px 14px 10px;display:flex;justify-content:space-between;align-items:center;gap:5px}#ipad-head strong{font-size:14px}#ipad .tag{color:#5cddab;text-transform:uppercase;font-size:10px;letter-spacing:.1em;font-weight:800}#ipad-body{padding:10px 12px;overflow-y:auto;flex:1}#ipad-body h2{font-size:15px;margin:2px 0 10px}#steps{list-style:none;margin:0;padding:0}#steps li{display:flex;align-items:flex-start;gap:9px;margin:0 0 6px;padding:8px;border:1px solid #253b4d;border-radius:8px;background:#0b2235;color:#c4d6e4;font-size:12px}#steps li strong{display:block;font-size:12px;color:#f1f8ff}#steps li.done{background:#0c342f;border-color:#307b64}#steps li.current{border-color:#47baff;box-shadow:0 0 0 1px #46b7f866;background:#12344f}#steps li .num{color:#8dc5e5;min-width:17px;font-weight:700}#steps li.done .num{color:#8ff4bd}#ipad-foot{padding:11px 12px;border-top:1px solid #2e495d;background:#0c263b;display:flex;align-items:center;gap:6px;justify-content:space-between}#ipad-foot button{background:#0870ae;border:1px solid #55b7f2;padding:8px 10px;border-radius:8px;font-weight:700;font-size:12px}#ipad-foot button.secondary{background:#16314a;border-color:#557089}#ipad-foot span{color:#9ebdd0;font-size:11px}#footer{position:absolute;bottom:11px;right:15px;padding:8px 12px;background:#061523c9;border-radius:10px;font-size:11px;color:#b5c7d8;max-width:355px}svg .usable{cursor:pointer;transition:filter .2s}svg .usable:hover{filter:drop-shadow(0px 0px 10px #4de9ff)}svg .usable.hot{filter:drop-shadow(0px 0px 14px #52ccff)}.instrument-number{fill:#eee;font-size:11px;font-weight:600}.control-label{font:bold 13px Arial;fill:#e1e4e1;letter-spacing:1px}#help button{padding:6px 9px;margin-top:10px;border:1px solid #4d91b9;background:#183b59;border-radius:7px}#mobile{display:none}@media(max-width:730px){#help{top:auto;bottom:144px;right:10px;width:190px;padding:10px;font-size:11px}#help .hint{font-size:10px}#kneeboard{width:min(290px,66vw);height:52vh;left:12px}#footer{display:none}#topbar{left:8px;right:8px;top:8px}#actions button{padding:6px;font-size:11px}#brand{font-size:12px}}
+
+/* Welcome screen for shareable concept demo */
+#welcome{position:fixed;inset:0;z-index:100;background:linear-gradient(145deg,#061422f2,#07192be9);display:grid;place-items:center;padding:22px;backdrop-filter:blur(7px)}
+#welcome.dismissed{display:none}
+#welcome-card{width:min(550px,100%);padding:clamp(26px,5vw,44px);border:1px solid #4b7998;border-radius:24px;background:linear-gradient(158deg,#183752,#081b2c);box-shadow:0 28px 95px #000b}
+#welcome-kicker{color:#75cdfa;font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:750}
+#welcome h1{font-size:clamp(27px,5vw,43px);line-height:1.13;margin:16px 0 7px;letter-spacing:-.035em}
+#welcome h2{font-size:20px;color:#b9ddf4;font-weight:500;margin:0 0 20px}
+#welcome p{font-size:15px;line-height:1.6;color:#d0e1ec;margin:0 0 18px}
+#welcome-note{border-top:1px solid #5575906e;padding-top:15px;margin:18px 0 22px;font-size:12px;line-height:1.55;color:#b7c9d8}
+#begin-demo{border:1px solid #65caff;background:#087bb9;border-radius:12px;padding:15px 24px;width:100%;font-size:17px;font-weight:750;color:white}
+#begin-demo:hover,#begin-demo:focus-visible{background:#0795d6;outline:2px solid #8ad8ff;outline-offset:2px}
+</style></head><body><section id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-title"><div id="welcome-card"><div id="welcome-kicker">✈ Interactive Aviation Training Concept</div><h1 id="welcome-title">N796SP · Cessna 172S</h1><h2>Preflight Interior</h2><p>Take the pilot's seat, follow the spoken flow, operate the cockpit controls and finish by checking the electronic kneeboard.</p><p><strong>Listen → Do → Verify → Repeat.</strong></p><div id="welcome-note">Early interactive browser prototype · Stylized cockpit and simulated controls · Not an FAA-approved training device or an operational checklist. Procedures must be verified against the aircraft's approved POH and school checklist before flight.</div><button id="begin-demo" type="button">Start Demo →</button></div></section><div id="scene"><div id="viewport"><svg id="cockpit" viewBox="0 0 1800 1060" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dash" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#52504b"/><stop offset=".2" stop-color="#303237"/><stop offset=".8" stop-color="#181e23"/><stop offset="1" stop-color="#0d141b"/></linearGradient><linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a3a4a2"/><stop offset=".55" stop-color="#5a6063"/><stop offset="1" stop-color="#222d31"/></linearGradient><linearGradient id="wind" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#75b9e8"/><stop offset=".55" stop-color="#d8edf5"/><stop offset=".57" stop-color="#b9cdb5"/><stop offset="1" stop-color="#536a50"/></linearGradient><radialGradient id="dial"><stop stop-color="#212b31"/><stop offset=".8" stop-color="#050b0f"/><stop offset="1" stop-color="#64727a"/></radialGradient><linearGradient id="yoke"><stop stop-color="#545a60"/><stop offset=".5" stop-color="#161e23"/><stop offset="1" stop-color="#7a7b79"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity=".55"/></filter><pattern id="speckle" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".6" fill="#d5cfbc" opacity=".22"/></pattern></defs>
+<!-- apron and horizon -->
+<rect width="1800" height="720" fill="url(#wind)"/><path d="M0 555 Q280 510 540 552 T1080 556 T1800 545 L1800 688 0 688" fill="#697e67"/><path d="M0 620 L1800 609 1800 720 0 720" fill="#9b9b98"/><path d="M850 617 L1040 617 1120 720 760 720Z" fill="#cec4ab" opacity=".6"/><g fill="#728885" opacity=".7"><rect x="195" y="511" width="225" height="80"/><rect x="1230" y="515" width="345" height="75"/></g>
+<!-- window frames / ceiling -->
+<path d="M-40 -10 H1840 V90 Q1550 70 1370 95 L1140 125 410 125 200 90 -40 100Z" fill="#b6ae98"/><path d="M365 74 L475 108 535 570 470 620 395 142" fill="#9d988c" stroke="#545a58" stroke-width="15"/><path d="M1330 82 L1250 105 1220 571 1300 610 1370 144" fill="#999488" stroke="#525859" stroke-width="15"/><path d="M0 235 L360 246 470 620 330 900 -50 900" fill="#b3ac9a" stroke="#5a5b59" stroke-width="16"/><path d="M1800 235 L1395 250 1290 620 1465 930 1850 900" fill="#a9a393" stroke="#5b5956" stroke-width="16"/>
+<!-- sun visors -->
+<rect x="625" y="109" width="205" height="43" rx="6" fill="#3c484a" stroke="#91958d"/><rect x="1000" y="109" width="210" height="43" rx="6" fill="#3c484a" stroke="#91958d"/>
+<!-- panel upper hood -->
+<path d="M305 395 Q900 320 1470 391 L1550 475 1530 760 300 760 255 470Z" fill="#151b21" stroke="#444c50" stroke-width="13" filter="url(#shadow)"/><path d="M355 408 Q875 343 1435 401 L1485 450 343 450Z" fill="#4a4640"/><path d="M343 448 H1478 L1530 774 300 775Z" fill="url(#dash)" stroke="#756f64" stroke-width="8"/><rect x="351" y="468" width="1083" height="279" rx="24" fill="#454643" stroke="#797974" stroke-width="5"/><rect x="366" y="481" width="1052" height="258" rx="12" fill="#333a3a"/><rect x="370" y="482" width="1044" height="254" rx="11" fill="url(#speckle)"/>
+<!-- G1000 / nav avionics panels -->
+<g id="pfd"><rect x="422" y="503" width="370" height="233" rx="10" fill="#0a1017" stroke="#9aa7a7" stroke-width="5"/><rect x="454" y="518" width="307" height="191" fill="#101d27" stroke="#222b31" stroke-width="5"/><rect x="470" y="530" width="275" height="163" fill="#12618c"/><path d="M470 610 H745 V693 H470Z" fill="#986441"/><path d="M470 608 Q590 605 745 608" stroke="#e9f0e7" stroke-width="4"/><path d="M575 592 h62 m-31 -27 v81" stroke="#eef8ff" stroke-width="4"/><text x="475" y="548" fill="white" font-size="12">N796SP</text><text x="693" y="548" fill="white" font-size="12">PFD</text><g fill="#aab9b9"><circle cx="439" cy="539" r="5"/><circle cx="439" cy="568" r="5"/><circle cx="439" cy="598" r="5"/><circle cx="439" cy="626" r="5"/><circle cx="439" cy="658" r="5"/><circle cx="439" cy="686" r="5"/><circle cx="776" cy="539" r="5"/><circle cx="776" cy="568" r="5"/><circle cx="776" cy="598" r="5"/><circle cx="776" cy="626" r="5"/><circle cx="776" cy="658" r="5"/><circle cx="776" cy="686" r="5"/></g></g>
+<g id="mfd"><rect x="866" y="503" width="385" height="233" rx="10" fill="#0a1017" stroke="#9aa7a7" stroke-width="5"/><rect x="898" y="517" width="322" height="192" fill="#081017" stroke="#252d34" stroke-width="5"/><path d="M925 535 L1170 535 1186 679 936 681Z" fill="#2c3c32"/><path d="M944 672 Q1000 600 1052 638 T1185 577" stroke="#c5a577" fill="none" stroke-width="4"/><path d="M935 565 Q1040 615 1180 655" fill="none" stroke="#96b59e" stroke-width="3"/><path d="M1104 538 L1082 683" stroke="#b6c6b6" stroke-dasharray="8 7" stroke-width="2"/><text x="917" y="542" fill="#dce9e8" font-size="12">MAP · GPS</text><g fill="#aab9b9"><circle cx="883" cy="539" r="5"/><circle cx="883" cy="568" r="5"/><circle cx="883" cy="598" r="5"/><circle cx="883" cy="626" r="5"/><circle cx="883" cy="658" r="5"/><circle cx="883" cy="686" r="5"/><circle cx="1234" cy="539" r="5"/><circle cx="1234" cy="568" r="5"/><circle cx="1234" cy="598" r="5"/><circle cx="1234" cy="626" r="5"/><circle cx="1234" cy="658" r="5"/><circle cx="1234" cy="686" r="5"/></g></g>
+<!-- yokes -->
+<g transform="translate(610 764)" filter="url(#shadow)"><rect x="-17" y="-40" width="34" height="100" rx="14" fill="#59636b"/><path d="M-115 -30 Q-148 -80 -118 -101 Q-91 -114 -45 -77 Q0 -46 45 -77 Q91 -114 118 -101 Q148 -80 115 -30 L72 16 Q38 37 0 28 Q-38 37 -72 16Z" fill="url(#yoke)" stroke="#8e9fa7" stroke-width="8"/><rect x="-46" y="-22" width="92" height="48" rx="12" fill="#20292f"/><text x="0" y="0" text-anchor="middle" fill="#e0ded7" font-size="13" font-weight="bold">CESSNA</text></g>
+<g transform="translate(1285 766) scale(.82)" opacity=".75"><rect x="-17" y="-40" width="34" height="100" rx="14" fill="#59636b"/><path d="M-115 -30 Q-148 -80 -118 -101 Q-91 -114 -45 -77 Q0 -46 45 -77 Q91 -114 118 -101 Q148 -80 115 -30 L72 16 Q38 37 0 28 Q-38 37 -72 16Z" fill="url(#yoke)" stroke="#8e9fa7" stroke-width="8"/><rect x="-46" y="-22" width="92" height="48" rx="12" fill="#20292f"/></g>
+<!-- console -->
+<path d="M723 745 H1110 L1184 1060 H700Z" fill="#6c6d66" stroke="#242c2c" stroke-width="11"/><path d="M737 764 H1090 L1141 1050 H723Z" fill="#3b403e"/><text x="922" y="793" text-anchor="middle" fill="#e6d8b0" font-size="16">CESSNA 172S · N796SP</text>
+<!-- switches -->
+<g id="masterControl" class="usable" data-control="master" transform="translate(766 829)"><rect x="-30" y="-25" width="60" height="77" rx="5" fill="#161b1e" stroke="#838b89" stroke-width="3"/><rect class="moving" x="-14" y="-16" width="28" height="48" rx="5" fill="#c5bfc0"/><text x="0" y="-33" text-anchor="middle" class="control-label">MASTER</text><text x="0" y="65" text-anchor="middle" class="control-label">OFF / ON</text></g>
+<g id="beaconControl" class="usable" data-control="beacon" transform="translate(839 829)"><rect x="-28" y="-25" width="56" height="77" rx="5" fill="#161b1e" stroke="#838b89" stroke-width="3"/><rect class="moving" x="-13" y="-16" width="26" height="48" rx="5" fill="#c5bfc0"/><text x="0" y="-33" text-anchor="middle" class="control-label">BEACON</text></g>
+<g id="navControl" class="usable" data-control="nav" transform="translate(912 829)"><rect x="-28" y="-25" width="56" height="77" rx="5" fill="#161b1e" stroke="#838b89" stroke-width="3"/><rect class="moving" x="-13" y="-16" width="26" height="48" rx="5" fill="#c5bfc0"/><text x="0" y="-33" text-anchor="middle" class="control-label">NAV</text></g>
+<!-- key and throttle -->
+<g id="keyControl" class="usable" data-control="key" transform="translate(746 956)"><circle r="28" fill="#121719" stroke="#9caaa8" stroke-width="7"/><rect id="keyBlade" x="-5" y="-14" width="10" height="52" rx="3" fill="#abbabc" opacity=".2"/><text x="0" y="55" text-anchor="middle" class="control-label">IGNITION KEY</text></g>
+<g id="throttleControl" class="usable" data-control="throttle" transform="translate(1010 952)"><rect x="-14" y="-44" width="28" height="110" rx="9" fill="#141a1f"/><rect id="throttleStem" x="-7" y="-27" width="14" height="65" fill="#cbd1ce"/><circle id="throttleKnob" cy="-27" r="25" fill="#13181e" stroke="#9aa3a8" stroke-width="4"/><text y="84" text-anchor="middle" class="control-label">THROTTLE</text></g>
+<g id="mixtureControl" class="usable" data-control="mixture" transform="translate(1080 952)"><rect x="-13" y="-44" width="26" height="110" rx="9" fill="#1c1f21"/><rect id="mixtureStem" x="-6" y="-27" width="12" height="65" fill="#cbd1ce"/><circle id="mixtureKnob" cy="-27" r="25" fill="#9c1d1c" stroke="#dc8581" stroke-width="4"/><text y="84" text-anchor="middle" class="control-label">MIXTURE</text></g>
+<!-- parking brake, fuel selector and seat -->
+<g id="brakeControl" class="usable" data-control="brake" transform="translate(501 921)"><rect x="-60" y="-32" width="122" height="77" rx="9" fill="#303b3f" stroke="#798481" stroke-width="5"/><rect id="brakeHandle" x="-52" y="-13" width="65" height="22" rx="11" fill="#202325" stroke="#afb9b7" stroke-width="4"/><text x="0" y="-46" text-anchor="middle" class="control-label">PARKING BRAKE</text></g>
+<g id="fuelControl" class="usable" data-control="fuel" transform="translate(915 990)"><circle r="38" fill="#141d21" stroke="#a4a9a0" stroke-width="5"/><path id="fuelNeedle" d="M0 0 L0 -30" stroke="#e1d1a7" stroke-width="10" stroke-linecap="round"/><text x="0" y="-46" text-anchor="middle" class="control-label">FUEL SELECTOR</text><text x="0" y="59" text-anchor="middle" class="control-label">BOTH</text></g>
+<g id="seatControl" class="usable" data-control="seat" transform="translate(448 1019)"><rect x="-85" y="-24" width="170" height="32" rx="12" fill="#343b3a" stroke="#a8a298" stroke-width="4"/><path d="M-47 -8H50" stroke="#e4bb70" stroke-width="8"/><text y="-50" text-anchor="middle" class="control-label">SEAT ADJUST</text></g>
+<!-- below panel and seat curves: decoration is not interactive -->
+<g pointer-events="none">
+<path d="M-50 870 Q140 775 295 830 L365 1060 -50 1060Z" fill="#77756f" opacity=".85"/><path d="M1480 855 Q1670 777 1850 853 L1850 1060 1450 1060Z" fill="#77756f" opacity=".85"/><path d="M540 1060 Q635 915 720 1060" stroke="#404448" stroke-width="80" opacity=".95" fill="none"/><path d="M1130 1060 Q1270 909 1380 1060" stroke="#404448" stroke-width="80" opacity=".95" fill="none"/>
+</g><g id="breakersControl" class="usable" data-control="breakers" transform="translate(991 834)"><rect x="-58" y="-61" width="116" height="145" rx="8" fill="#273740" stroke="#8aafc5" stroke-width="3"/><rect x="-42" y="-38" width="84" height="84" rx="4" fill="#1c272a" stroke="#8a8e85"/><g fill="#101419" stroke="#79858a" stroke-width="2"><circle cx="-25" cy="-19" r="10"/><circle cx="-25" cy="11" r="10"/><circle cx="0" cy="-19" r="10"/><circle cx="0" cy="11" r="10"/><circle cx="25" cy="-19" r="10"/><circle cx="25" cy="11" r="10"/></g><text x="0" y="-45" text-anchor="middle" class="control-label">BREAKERS</text><rect class="breaker-hitbox" x="-66" y="-68" width="132" height="160" rx="6" fill="#ffffff" fill-opacity="0.001" pointer-events="all"/></g>
+</svg></div><div id="glass"></div></div>
+<header id="topbar"><div class="pill"><div id="brand">✈ N796SP · Cessna 172S</div><small>Preflight Interior · interactive concept demo</small></div><div class="pill" id="actions"><button id="pilot" class="active">Pilot in Command</button><button id="observe">Observer</button><button id="center">Center view</button><button id="show-knee">Hide kneeboard</button><button id="sound">🔊 Audio on</button></div></header>
+<div id="help"><strong id="headline">Preflight Interior</strong><div id="cue">Sit in the left seat. Start the audio flow, then operate the highlighted control.</div><div class="hint" style="margin-top:8px">Drag an empty part of the cockpit to look left or right. Scroll to zoom. Click a switch to move it. Look down at your kneeboard to verify.</div><button id="reset">Restart flow</button></div><div id="toast"></div>
+<div id="kneeboard"><div class="strap"></div><div id="ipad"><div id="ipad-head"><div><div class="tag">N796SP · knee checklist</div><strong>Preflight Interior</strong><div style="font-size:10px;color:#b7d6ea">↔ Drag here to move</div></div><button class="subbutton" id="fold" aria-label="Collapse kneeboard">▾</button></div><div id="ipad-body"><h2 id="phase">Flow · audio guided</h2><ol id="steps"></ol></div><div id="ipad-foot"><span id="progress">Ready</span><button id="start">Start audio flow</button><button class="secondary" id="verify" style="display:none">Verify</button></div></div></div>
+<div id="flow-banner" role="status" aria-live="polite" style="display:none;position:fixed;z-index:9000;top:100px;left:50%;transform:translateX(-50%);max-width:min(640px,94vw);background:#0c334b;color:#fff;border:2px solid #7dd6ff;border-radius:15px;padding:18px 22px;box-shadow:0 12px 45px #000b;text-align:center;font:15px system-ui"><strong id="flow-banner-title" style="display:block;font-size:23px;margin-bottom:8px">Flow complete</strong><div id="flow-banner-detail">Now verify the checklist on your knee.</div><button id="flow-banner-btn" style="margin-top:12px;padding:10px 16px;border:0;border-radius:8px;background:#0b85b9;color:white;font-weight:bold;cursor:pointer">Begin checklist review</button></div><div id="footer">Public demonstration · Standalone non-XR concept · Stylized cockpit, not an exact avionics or systems reproduction · Training content requires POH / school checklist validation.</div>
+
+<style>
+#brief-modal{position:fixed;inset:0;background:#03101ce8;z-index:10003;display:none;align-items:center;justify-content:center;padding:18px}#brief-modal.show{display:flex}
+#brief-card{width:min(810px,97vw);max-height:94vh;overflow:auto;background:#0e263a;color:#edf8ff;border:1px solid #6286a0;border-radius:18px;padding:22px;box-shadow:0 20px 90px #000b;font:15px system-ui}
+#brief-card h2{margin:4px 0 10px}#brief-card button,#brief-card select{background:#1c486a;color:#fff;border:1px solid #5289af;border-radius:9px;padding:10px 12px;cursor:pointer;font:inherit}#brief-card .primary{background:#087bb4;border-color:#65ccff}#brief-card .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}#brief-card .tabs button.selected{background:#087bb4;border-color:#77d7ff}#brief-script{white-space:pre-wrap;background:#081b2b;border:1px solid #35546d;border-radius:12px;padding:16px;max-height:31vh;overflow-y:auto;line-height:1.55}#brief-controls{position:sticky;bottom:-22px;background:#0e263a;padding:12px 0 4px;border-top:1px solid #35546d;display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}#brief-audio{width:100%;margin:10px 0}#brief-section{min-width:225px;max-width:100%}#brief-hint{font-size:12px;color:#abc9dc;margin:8px 0}#brief-edit{display:none;width:100%;min-height:180px;background:#081b2b;color:white;border:1px solid #54809a;border-radius:9px;padding:12px;font:14px system-ui;resize:vertical}#brief-edit.show{display:block}
+</style>
+<div id="brief-modal" role="dialog" aria-modal="true" aria-labelledby="brief-title"><div id="brief-card">
+<div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><small>PASSENGER BRIEFING · N796SP</small><h2 id="brief-title">Brief your passengers</h2></div><button id="brief-close" aria-label="Close briefing">✕</button></div>
+<p>Choose how to practice the passenger briefing. Read the script yourself, or let the recorded pilot voice play. Finish the briefing to continue the cockpit flow.</p>
+<div class="tabs"><button id="brief-read" class="selected">📖 Read the pilot script</button><button id="brief-playmode">🔊 Play pilot audio</button></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><label for="brief-section">Topic</label><select id="brief-section"></select></div>
+<div id="brief-hint">Use this as a rehearsal prompt. This is a read-only public demonstration.</div><div id="brief-script"></div>
+<div id="brief-playback" style="display:none;margin-top:10px"><button id="brief-play-all" class="primary" type="button">▶ Play full briefing</button> <button id="brief-pause" type="button">Pause</button><span id="brief-play-status" role="status" style="margin-left:8px;font-size:13px;color:#a5e7ca"></span></div><audio id="brief-audio" controls preload="none" style="display:none"></audio><div id="brief-controls"><button id="brief-prev">← Previous</button><button id="brief-next">Next topic →</button><button id="brief-complete" class="primary">Briefing complete · Continue flow →</button></div>
+<div id="brief-message" aria-live="polite" style="font-size:12px;color:#a5e7ca;margin-top:10px"></div>
+</div></div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const defaultItems=[
+{name:'Passenger briefing',answer:'Seatbelts, exits, communication, motion sickness and traffic lookout',control:null,voice:'Begin with the passenger briefing. Explain seatbelts, exits, communications, motion sickness and looking for traffic.'},
+{name:'Parking brake',answer:'SET',control:'brake',voice:'Parking brake. Set.'},
+{name:'Seat',answer:'ADJUSTED',control:'seat',voice:'Seat. Adjust and secure.'},
+{name:'Master switch',answer:'ON',control:'master',voice:'Master switch. On.'},
+{name:'Beacon',answer:'ON',control:'beacon',voice:'Beacon. On.'},
+{name:'Navigation lights',answer:'ON, if required by school procedure',control:'nav',voice:'Navigation lights. On for this training flow.'},
+{name:'Circuit breakers',answer:'IN / CHECKED — click breaker panel to visually confirm',control:'breakers',voice:'Circuit breakers. Visually check that they are in. Click the breaker panel to acknowledge the inspection.'},
+{name:'Fuel selector',answer:'BOTH',control:'fuel',voice:'Fuel selector. Both.'},
+{name:'Ignition key',answer:'INSERTED; DO NOT TURN',control:'key',voice:'Insert the ignition key. Do not turn it.'}];
+// These are demonstration steps based on the supplied Tally draft, not an approved operational checklist.
+const defaultEndings={flow:'Flow complete. Look down at your knee checklist and verify each item.',review:'Preflight Interior checklist verified. You may repeat the flow.'};
+const endings={...defaultEndings};
+let items=defaultItems.map(s=>({...s}));
+let idx=-1,stage='ready',observer=false,audio=true,panX=0,panY=0,zoom=1,drag=false,lastX=0,lastY=0,moved=false,verification=0;
+const states={};
+const speechRate=.92;
+const voiceFor=(i)=>items[i].voice;
+const speak=(s)=>{if(!audio || !window.speechSynthesis)return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(s);u.rate=speechRate;u.pitch=.94;u.lang='en-US';speechSynthesis.speak(u)};
+const toast=(s)=>{const t=$('toast');t.textContent=s;t.classList.add('show');clearTimeout(window._toast);window._toast=setTimeout(()=>t.classList.remove('show'),2600)};
+const draw=()=>{const ol=$('steps');ol.innerHTML='';items.forEach((i,k)=>{const li=document.createElement('li');li.className=(k<idx?'done ':'')+(k===idx && stage==='flow'?'current':'');const num=document.createElement('span');num.className='num';num.textContent=k<idx?'✓':String(k+1);const content=document.createElement('div');const strong=document.createElement('strong');strong.textContent=i.name;const ans=document.createElement('span');ans.textContent=i.answer;content.append(strong,ans);li.append(num,content);ol.appendChild(li);if(k===idx && stage==='flow')li.scrollIntoView({block:'nearest'})}); document.querySelectorAll('.usable').forEach(el=>el.classList.toggle('hot',stage==='flow'&&idx>=0&&items[idx].control===el.dataset.control)); $('progress').textContent=stage==='flow'?`${Math.max(0,idx+1)} / ${items.length}`:stage==='verify'?`Review ${verification+1} of ${items.length}`:stage==='done'?'Complete':'Ready';$('start').style.display=stage==='ready'||stage==='done'?'':'none';$('verify').style.display=stage==='verify'?'':'none';$('verify').textContent=verification===items.length-1?'Finish review':'Verified →';$('phase').textContent=stage==='verify'?'Checklist verification':stage==='done'?'Session complete':'Flow · audio guided';};
+const cue=()=>{if(stage==='flow'&&idx<items.length){$('headline').textContent=`${idx+1} · ${items[idx].name}`;$('cue').textContent=items[idx].answer; if(!items[idx].name.toLowerCase().includes('passenger briefing'))speak(voiceFor(idx));if(!items[idx].control){if(items[idx].name.toLowerCase().includes('passenger briefing')){setTimeout(()=>openBriefing(),150)}else{const current=items[idx];setTimeout(()=>{if(stage==='flow'&&items[idx]===current)advance()},5200)}}}else if(stage==='verify'){$('headline').textContent='Verify on your kneeboard';$('cue').textContent='Review each item and compare it with the cockpit. Use the verification button when satisfied.';speak(endings.flow)}else if(stage==='done'){$('headline').textContent='Preflight Interior complete';$('cue').textContent='Great. Run it again to build familiarity. This is a beta training demonstration, not a substitute for the approved checklist.';speak(endings.review)}draw()};
+const advance=()=>{idx++;if(idx>=items.length){stage='verify';verification=0;showFlowComplete()}else stage='flow';cue()};
+function showFlowComplete(){$('flow-banner-title').textContent='Flow complete';$('flow-banner-detail').textContent='Now check each item against your knee checklist.';$('flow-banner-btn').textContent='Begin checklist review';knee.classList.remove('hidden','fold');$('show-knee').textContent='Hide kneeboard';$('flow-banner').style.display='block';}
+$('flow-banner-btn').onclick=()=>{$('flow-banner').style.display='none';knee.classList.remove('hidden','fold');$('show-knee').textContent='Hide kneeboard';$('phase').scrollIntoView({block:'nearest'});};
+const start=()=>{$('flow-banner').style.display='none';closeBriefing();idx=0;stage='flow';verification=0;Object.keys(states).forEach(k=>delete states[k]); resetControls();draw();cue();toast('Audio-guided cockpit flow started')};
+function updateControl(k){if(!states[k])return;const g=$(k+'Control');if(k==='brake')$('brakeHandle').setAttribute('x',states[k]?'-4':'-52');if(['master','beacon','nav'].includes(k))g.querySelector('.moving').setAttribute('y',states[k]?'6':'-16');if(k==='key')$('keyBlade').setAttribute('opacity',states[k]?'1':'.2');if(k==='fuel')$('fuelNeedle').setAttribute('transform',states[k]?'rotate(0)':'rotate(-55)');if(k==='seat')g.setAttribute('transform',`translate(${states[k]?465:448} 1019)`);if(k==='breakers')g.querySelectorAll('circle').forEach(c=>c.setAttribute('fill',states[k]?'#667475':'#101419'))}
+const resetControls=()=>{['brake','seat','master','beacon','nav','breakers','fuel','key'].forEach(k=>{states[k]=false;updateControl(k)})};
+const confirmBreaker=()=>{
+  if(stage!=='flow'||items[idx]?.control!=='breakers'||observer)return false;
+  if(states.breakers)return true;
+  states.breakers=true; updateControl('breakers');
+  toast('Circuit breakers checked — proceeding to Fuel selector');
+  // Advance directly, not through a delayed click handler that can be lost.
+  advance();
+  return true;
+};
+const controls=document.querySelectorAll('.usable');
+controls.forEach(el=>{
+  const k=el.dataset.control;
+  el.addEventListener('pointerdown',e=>{
+    e.stopPropagation();
+    if(k==='breakers'){
+      e.preventDefault();
+      if(!confirmBreaker() && stage==='flow')toast('Current task: '+items[idx].name);
+    }
+  });
+  el.addEventListener('click',e=>{
+    e.preventDefault();e.stopPropagation();
+    if(k==='breakers'){confirmBreaker();return}
+    if(observer){toast('Observer mode: switch to Pilot in Command to operate controls.');return}
+    if(stage!=='flow'){toast('Start the flow on your kneeboard.');return}
+    if(k!==items[idx].control){toast('Find the control for: '+items[idx].name);return}
+    states[k]=true;updateControl(k);toast(items[idx].name+' — '+items[idx].answer);
+    setTimeout(()=>{if(stage==='flow'&&items[idx]?.control===k)advance()},450);
+  });
+});
+$('begin-demo').addEventListener('click',()=>{$('welcome').classList.add('dismissed');$('start').click()});
+$('start').addEventListener('click',()=>{if(stage==='done'){$('start').textContent='Start audio flow'}start()});$('reset').addEventListener('click',()=>{$('flow-banner').style.display='none';closeBriefing();speechSynthesis?.cancel();stage='ready';idx=-1;resetControls();draw();$('headline').textContent='Preflight Interior';$('cue').textContent='Ready to begin. Start the audio flow from your kneeboard.';toast('Session reset')});$('verify').addEventListener('click',()=>{verification++;if(verification>=items.length){stage='done';$('start').textContent='Repeat procedure';$('flow-banner-title').textContent='Checklist verified';$('flow-banner-detail').textContent='Preflight Interior complete. You can repeat the procedure.';$('flow-banner-btn').textContent='Close';$('flow-banner').style.display='block';cue()}else{const i=items[verification];$('cue').textContent=`Verify: ${i.name} — ${i.answer}`;speak(`${i.name}. ${i.answer}.`);$('progress').textContent=`Review ${verification+1} of ${items.length}`;document.querySelectorAll('#steps li').forEach((el,k)=>el.classList.toggle('current',k===verification))}});
+$('fold').addEventListener('click',()=>{$('kneeboard').classList.toggle('fold');$('fold').textContent=$('kneeboard').classList.contains('fold')?'▴':'▾'});
+// Move the kneeboard by dragging its title/header. This panel stays above the cockpit,
+// but never captures clicks outside its own bounding rectangle.
+const knee=$('kneeboard'), kneeHead=$('ipad-head'); let kd=null;
+kneeHead.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return; e.preventDefault();const r=knee.getBoundingClientRect();knee.classList.add('moving');knee.style.left=r.left+'px';knee.style.top=r.top+'px';knee.style.bottom='auto';kd={x:e.clientX,y:e.clientY,left:r.left,top:r.top};kneeHead.classList.add('dragging');kneeHead.setPointerCapture(e.pointerId)});
+kneeHead.addEventListener('pointermove',e=>{if(!kd)return;e.preventDefault();const x=kd.left+e.clientX-kd.x,y=kd.top+e.clientY-kd.y;const w=knee.getBoundingClientRect().width,h=knee.getBoundingClientRect().height;knee.style.left=Math.max(0,Math.min(window.innerWidth-w,x))+'px';knee.style.top=Math.max(0,Math.min(window.innerHeight-Math.min(h,70),y))+'px'});
+const dropKnee=()=>{kd=null;kneeHead.classList.remove('dragging')};kneeHead.addEventListener('pointerup',dropKnee);kneeHead.addEventListener('pointercancel',dropKnee);
+$('show-knee').addEventListener('click',()=>{knee.classList.toggle('hidden');$('show-knee').textContent=knee.classList.contains('hidden')?'Show kneeboard':'Hide kneeboard'});
+$('pilot').onclick=()=>{observer=false;$('pilot').classList.add('active');$('observe').classList.remove('active');toast('Pilot in Command — controls enabled')};$('observe').onclick=()=>{observer=true;$('observe').classList.add('active');$('pilot').classList.remove('active');toast('Observer — watch demonstration (pilot interactions disabled)')};$('sound').onclick=()=>{audio=!audio;$('sound').textContent=audio?'🔊 Audio on':'🔇 Audio off';if(!audio)speechSynthesis?.cancel()};
+const cockpit=$('cockpit');cockpit.addEventListener('pointerdown',e=>{if(e.target.closest('.usable'))return;drag=true;moved=false;lastX=e.clientX;lastY=e.clientY;cockpit.classList.add('dragging');cockpit.setPointerCapture(e.pointerId)});cockpit.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lastX,dy=e.clientY-lastY;if(Math.abs(dx)+Math.abs(dy)>1)moved=true;panX=Math.max(-380,Math.min(380,panX+dx/zoom));panY=Math.max(-210,Math.min(155,panY+dy/zoom));lastX=e.clientX;lastY=e.clientY;apply()});cockpit.addEventListener('pointerup',()=>{drag=false;cockpit.classList.remove('dragging')});function apply(){const w=window.innerWidth,h=window.innerHeight;const s=Math.max(w/1800,h/1060)*zoom;const v=$('viewport');v.style.setProperty('--scale',s);v.style.setProperty('--panX',panX+'px');v.style.setProperty('--panY',panY+'px')};window.addEventListener('resize',apply);window.addEventListener('wheel',e=>{zoom=Math.max(.85,Math.min(1.9,zoom+(e.deltaY<0?.08:-.08)));apply()},{passive:true});$('center').onclick=()=>{panX=panY=0;zoom=1;apply()};
+
+// Passenger briefing script or existing MP3 recordings. No automatic completion while briefing.
+const briefTopics=[
+{id:'seat',name:'Seatbelt use',file:'audio/SeatbeltUse.mp3'},
+{id:'exit',name:'Exit procedure',file:'audio/Exitprocedure.mp3'},
+{id:'radios',name:'Cockpit communications',file:'audio/Radios.mp3'},
+{id:'motion',name:'Motion sickness',file:'audio/Motionsickness.mp3'},
+{id:'traffic',name:'Traffic lookout',file:'audio/Traffic.mp3'}
+];
+const briefDefaults={
+seat:'Confirm seat belts and shoulder harnesses latch securely and release correctly. Some aircraft use a red push-button release, while others use a pull-away latch. Use at all times.',
+exit:'Exit procedure briefing: listen to the recorded explanation. Script pending aircraft-specific review.',
+radios:'Confirm cockpit communication expectations. During taxi, takeoff and landing, maintain a sterile cockpit and limit conversation to essential flight-related communications only.',
+motion:'If feeling nauseous, focus on a fixed point on the horizon, and open the cabin air vents for fresh airflow.\n\nIf symptoms persist, use the airsickness bags located under the yoke or in front of your seat.\n\nIf needed, briefly open the window for additional airflow, being mindful of passengers seated behind you.',
+traffic:'Actively scan outside and help spot traffic. If traffic is spotted, call it out using the clock position and altitude if known.'
+};
+const briefingScripts={...briefDefaults};
+let briefIndex=0,briefMode='read',briefOpen=false,briefAutoPlay=false;
+const briefPlayer=$('brief-audio');
+function showBriefTopic(){
+  const t=briefTopics[briefIndex];
+  $('brief-section').value=String(briefIndex);
+  $('brief-script').textContent=briefingScripts[t.id];
+  briefPlayer.pause();briefPlayer.src=t.file;briefPlayer.load();
+  briefPlayer.style.display=briefMode==='audio'?'block':'none';
+  $('brief-playback').style.display=briefMode==='audio'?'block':'none';
+  $('brief-prev').disabled=briefIndex===0;
+  $('brief-next').disabled=briefIndex===briefTopics.length-1;
+  $('brief-play-status').textContent=briefMode==='audio'?`Recording ${briefIndex+1} of ${briefTopics.length}: ${t.name}`:'';
+}
+function playBriefTrack(){
+  briefPlayer.play().then(()=>{$('brief-pause').textContent='Pause';}).catch(()=>{$('brief-play-status').textContent='Select Play on the audio player to start listening.';});
+}
+function playFullBriefing(){briefAutoPlay=true;briefIndex=0;showBriefTopic();playBriefTrack();}
+function selectBriefMode(m){
+  briefMode=m;briefAutoPlay=false;
+  $('brief-read').classList.toggle('selected',m==='read');
+  $('brief-playmode').classList.toggle('selected',m==='audio');
+  $('brief-hint').textContent=m==='read'?'Read the full script aloud. Select each topic to rehearse.':
+   'Play all five pilot recordings in order. The script remains visible so you can follow along.';
+  showBriefTopic();
+  if(m==='audio')playFullBriefing();
+}
+function openBriefing(){if(!items[idx]?.name.toLowerCase().includes('passenger briefing'))return;briefOpen=true;speechSynthesis?.cancel();$('brief-modal').classList.add('show');briefIndex=0;selectBriefMode('read')}
+function closeBriefing(){briefOpen=false;briefAutoPlay=false;briefPlayer.pause();$('brief-modal').classList.remove('show')}
+$('brief-close').onclick=()=>{closeBriefing();toast('Briefing paused — reopen to continue');};
+$('brief-read').onclick=()=>selectBriefMode('read');$('brief-playmode').onclick=()=>selectBriefMode('audio');
+$('brief-section').onchange=e=>{briefAutoPlay=false;briefIndex=Number(e.target.value);showBriefTopic();if(briefMode==='audio')playBriefTrack()};
+$('brief-prev').onclick=()=>{briefAutoPlay=false;briefIndex=Math.max(0,briefIndex-1);showBriefTopic();if(briefMode==='audio')playBriefTrack()};
+$('brief-next').onclick=()=>{briefAutoPlay=false;briefIndex=Math.min(briefTopics.length-1,briefIndex+1);showBriefTopic();if(briefMode==='audio')playBriefTrack()};
+$('brief-complete').onclick=()=>{closeBriefing();if(stage==='flow'&&items[idx]?.name.toLowerCase().includes('passenger briefing'))advance()};
+$('brief-play-all').onclick=playFullBriefing;
+$('brief-pause').onclick=()=>{if(briefPlayer.paused){playBriefTrack()}else{briefPlayer.pause();$('brief-pause').textContent='Resume'}};
+briefPlayer.addEventListener('ended',()=>{
+ if(briefMode==='audio'&&briefOpen&&briefAutoPlay){
+   if(briefIndex<briefTopics.length-1){briefIndex++;showBriefTopic();playBriefTrack()}
+   else{briefAutoPlay=false;$('brief-play-status').textContent='All five recordings finished. Review the script or select Briefing complete.'}
+ }
+});
+for(let n=0;n<briefTopics.length;n++){const o=document.createElement('option');o.value=n;o.textContent=(n+1)+'. '+briefTopics[n].name;$('brief-section').append(o)}
+resetControls();draw();apply();
+})();
+
+
+</script></body></html>
