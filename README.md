@@ -2,9 +2,11 @@
 
 ## Preflight Interior | Beta Prototype
 
-An interactive training tool designed to give student pilots a hands-on alternative to studying aircraft procedures with a static cockpit poster.
+An interactive cockpit training platform designed to help pilots practice aircraft procedures, cockpit flows, and emergency scenarios in a realistic, hands-on environment.
 
-Students can explore cockpit controls, follow audio-guided procedures, and reinforce checklist habits through repetition.
+Rather than relying on static cockpit posters or memorized checklists alone, pilots can interact with cockpit controls, follow audio-guided procedures, and practice normal, abnormal, and emergency flows through repetition.
+
+The goal is to build cockpit familiarity, reinforce procedural knowledge, and help pilots become more confident and proficient in managing aircraft systems and responding to unexpected situations.
 
 ## Current Features
 
@@ -13,6 +15,15 @@ Students can explore cockpit controls, follow audio-guided procedures, and reinf
 - Passenger briefing with audio and written scripts
 - Electronic checklist verification
 - Browser-based interactive demonstration
+
+## Planned Features
+
+- Normal, abnormal, and emergency cockpit flows
+- Interactive emergency scenarios and decision-making exercises
+- Engine start, taxi, run-up, and shutdown procedures
+- Aircraft systems and cockpit control familiarization
+- Audio-guided procedures with interactive verification
+- Repetition and practice modes for procedural proficiency
 
 ## Important Disclaimer
 
