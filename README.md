@@ -1,12 +1,11 @@
-# Cessna 172S — Interactive Cockpit Trainer
+# P24 Aerospace
+## Cessna 172S — Interactive Cockpit Trainer
 
 ## Preflight Interior | Beta Prototype
 
-An interactive cockpit training platform designed to help pilots practice aircraft procedures, cockpit flows, and emergency scenarios in a realistic, hands-on environment.
+An interactive aviation training platform designed to help pilots practice cockpit procedures through hands-on interaction, audio guidance, and repetition.
 
-Rather than relying on static cockpit posters or memorized checklists alone, pilots can interact with cockpit controls, follow audio-guided procedures, and practice normal, abnormal, and emergency flows through repetition.
-
-The goal is to build cockpit familiarity, reinforce procedural knowledge, and help pilots become more confident and proficient in managing aircraft systems and responding to unexpected situations.
+Pilots can operate simulated cockpit controls, follow guided procedures, and verify their actions using an electronic checklist.
 
 ## Current Features
 
@@ -18,12 +17,11 @@ The goal is to build cockpit familiarity, reinforce procedural knowledge, and he
 
 ## Planned Features
 
-- Normal, abnormal, and emergency cockpit flows
-- Interactive emergency scenarios and decision-making exercises
-- Engine start, taxi, run-up, and shutdown procedures
-- Aircraft systems and cockpit control familiarization
-- Audio-guided procedures with interactive verification
-- Repetition and practice modes for procedural proficiency
+- Normal, abnormal, and emergency procedures
+- Interactive emergency scenarios
+- Engine start, taxi, run-up, and shutdown
+- Aircraft systems familiarization
+- Repetition and decision-making exercises
 
 ## Important Disclaimer
 
