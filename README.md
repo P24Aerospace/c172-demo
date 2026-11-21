@@ -1,10 +1,10 @@
-# P24 Aviation Flow Trainer
+# Plonky Works Flow Trainer
 
 ## Cessna 172 — Interactive Cockpit Training | Beta Prototype
 
 **Practice the flow. Chair Fly Anywhere.**
 
-P24 Aviation Flow Trainer is a browser-based study prototype designed to help pilots rehearse cockpit procedures using interactive controls, audio guidance, and repetition. Students select a module on the landing page, interact with a simulated cockpit, and use an electronic checklist to review their actions.
+Plonky Works Flow Trainer is a browser-based study prototype designed to help pilots rehearse cockpit procedures using interactive controls, audio guidance, and repetition. Students select a module on the landing page, interact with a simulated cockpit, and use an electronic checklist to review their actions.
 
 ## Available modules
 
